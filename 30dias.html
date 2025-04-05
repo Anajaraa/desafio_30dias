@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>30 Dias da Virada</title>
+  <style>
+    body {
+      background-color: #fff6f0;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #b66e6e;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .day-box {
+      background-color: #fff;
+      border: 2px solid #d4a5a5;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .day-box.done {
+      background-color: #d4f5d4;
+      border-color: #4caf50;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: #ffbebe;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #e59494;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 30 Dias da Virada 🌟</h1>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const frases = [
+      "Hoje me cuido como quem está se reencontrando.",
+      "Um passo por dia ainda é um passo.",
+      "Meu corpo merece amor, não punição.",
+      "Eu sou mais forte do que penso.",
+      "Ser gentil comigo é um ato de coragem.",
+      "Eu não estou sozinha nessa jornada.",
+      "Hoje eu escolho recomeçar.",
+      "Não preciso estar pronta, só presente.",
+      "Eu sou bonita, mesmo antes de mudar.",
+      "A dor não me define. A ação sim.",
+      "Cada escolha hoje constrói meu amanhã.",
+      "Eu me respeito ao me movimentar.",
+      "A constância é mais forte que a motivação.",
+      "Um novo padrão está nascendo.",
+      "Eu mereço leveza.",
+      "Meu esforço importa.",
+      "Hoje, eu me priorizo.",
+      "Eu sou suficiente, mesmo em processo.",
+      "Estou aprendendo a me amar de novo.",
+      "Cuidar de mim é um ato de amor próprio.",
+      "Eu me olho com mais carinho hoje.",
+      "Nada muda se eu não mudar.",
+      "A disciplina está me libertando.",
+      "Minha saúde é meu presente e futuro.",
+      "Eu me comprometo comigo.",
+      "Avançar é mais importante do que acelerar.",
+      "Meu corpo é minha casa. Hoje eu limpo um cômodo.",
+      "Hoje sou 1% melhor do que ontem.",
+      "Minha jornada é só minha. E ela vale a pena.",
+      "Eu posso. Eu mereço. Eu estou fazendo acontecer."
+    ];
+
+    const grid = document.getElementById('grid');
+
+    frases.forEach((frase, index) => {
+      const dia = index + 1;
+      const box = document.createElement('div');
+      box.className = 'day-box';
+      box.innerHTML = `
+        <strong>Dia ${dia}</strong><br>
+        <small>${frase}</small><br>
+        <button onclick="marcarFeito(${dia}, this)">Marcar como feito ✅</button>
+      `;
+
+      // Verifica se já foi feito (usando localStorage)
+      if (localStorage.getItem(`dia_${dia}`) === 'feito') {
+        box.classList.add('done');
+        box.querySelector('button').textContent = 'Feito ✅';
+      }
+
+      grid.appendChild(box);
+    });
+
+    function marcarFeito(dia, btn) {
+      const box = btn.closest('.day-box');
+      box.classList.add('done');
+      btn.textContent = 'Feito ✅';
+      localStorage.setItem(`dia_${dia}`, 'feito');
+    }
+  </script>
+</body>
+</html>
